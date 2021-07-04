@@ -8,4 +8,10 @@
     <ProjectReference Include="..\SampleNLayerProject.Data\SampleNLayerProject.Data.csproj" />
     <ProjectReference Include="..\SampleNLayerProject.Core\SampleNLayerProject.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>
