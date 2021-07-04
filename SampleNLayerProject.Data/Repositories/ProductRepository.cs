@@ -12,7 +12,7 @@ namespace SampleNLayerProject.Data.Repositories
         // _context field is converted to AppDbContext. Because we'll use AppDbContext class as context.
         // so we'll be able to reach tables defined in AppDbContext class.
         private AppDbContext _appDbContext { get => _context as AppDbContext; }
-        public ProductRepository(DbContext context) : base(context)
+        public ProductRepository(AppDbContext context) : base(context)
         {
         }
 

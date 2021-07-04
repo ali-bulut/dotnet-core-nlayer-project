@@ -20,11 +20,11 @@ namespace SampleNLayerProject.Core.Repositories
         // you don't specify a return type because it is always a bool.
         // When we want to treat lambda expressions as expression trees and look inside them instead of executing them,
         // we should use Expression<>
-        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         // If we use Task without <>, that means void in async programming.
-        Task AddAsync(TEntity entity);
-        Task AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
         TEntity Update(TEntity entity);
