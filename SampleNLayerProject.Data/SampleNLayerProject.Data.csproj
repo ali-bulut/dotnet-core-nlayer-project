@@ -15,6 +15,7 @@
     <None Remove="Configurations\" />
     <None Remove="Seeds\" />
     <None Remove="Repositories\" />
+    <None Remove="UnitOfWorks\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
@@ -32,5 +33,6 @@
     <Folder Include="Configurations\" />
     <Folder Include="Seeds\" />
     <Folder Include="Repositories\" />
+    <Folder Include="UnitOfWorks\" />
   </ItemGroup>
 </Project>
