@@ -31,7 +31,11 @@ namespace SampleNLayerProject.API
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString());
+                // we need to use second parameter to tell api project, our data layer is in other class library.
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o => {
+                    o.MigrationsAssembly("SampleNLayerProject.Data");
+
+                });
             });
 
             // when a request comes up and it sees IUnitOfWork in somewhere of the project,
