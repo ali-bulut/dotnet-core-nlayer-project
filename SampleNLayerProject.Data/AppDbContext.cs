@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using SampleNLayerProject.Core.Models;
+using SampleNLayerProject.Data.Configurations;
 
 namespace SampleNLayerProject.Data
 {
@@ -20,6 +21,8 @@ namespace SampleNLayerProject.Data
         // method that works before table creation operation on db.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
 }
