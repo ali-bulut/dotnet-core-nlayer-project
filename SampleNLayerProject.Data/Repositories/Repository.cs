@@ -19,14 +19,16 @@ namespace SampleNLayerProject.Data.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
+            return entity;
         }
 
-        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+            return entities;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -60,9 +62,9 @@ namespace SampleNLayerProject.Data.Repositories
             return entity;
         }
 
-        public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbSet.Where(predicate);
+            return await _dbSet.Where(predicate).ToListAsync();
         }
     }
 }
