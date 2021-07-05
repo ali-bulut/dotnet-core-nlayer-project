@@ -14,6 +14,12 @@ namespace SampleNLayerProject.API.Mapping
             // when an object is type of CategoryDto(generally coming from client),
             // then convert it to Category. (for example; post/put/patch operations) 
             CreateMap<CategoryDto, Category>();
+
+            CreateMap<Category, CategoryWithProductsDto>();
+            CreateMap<CategoryWithProductsDto, Category>();
+
+            CreateMap<Product, ProductDto>();
+            CreateMap<ProductDto, Product>();
         }
     }
 }
