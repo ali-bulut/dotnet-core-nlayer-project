@@ -44,7 +44,7 @@ namespace SampleNLayerProject.API
 
             // Dependency Injection
 
-            // when a request comes up and it sees IUnitOfWork in somewhere of the project,
+            // when a request comes up and it sees IUnitOfWork in somewhere of the project (constructors of the classes),
             // it'll create a new instance of UnitOfWork and will use it instead of IUnitOfWork.
             // If in one request there is more than one IUnitOfWork, it will use same instance for those also.
             // If we want to create new instance for every new IUnitOfWork, we need to use AddTransient instead of AddScoped.
