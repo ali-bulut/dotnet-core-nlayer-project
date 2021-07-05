@@ -11,9 +11,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SampleNLayerProject.Core.Repositories;
+using SampleNLayerProject.Core.Services;
 using SampleNLayerProject.Core.UnitOfWorks;
 using SampleNLayerProject.Data;
+using SampleNLayerProject.Data.Repositories;
 using SampleNLayerProject.Data.UnitOfWorks;
+using SampleNLayerProject.Service.Services;
 
 namespace SampleNLayerProject.API
 {
@@ -38,11 +42,19 @@ namespace SampleNLayerProject.API
                 });
             });
 
+            // Dependency Injection
+
             // when a request comes up and it sees IUnitOfWork in somewhere of the project,
             // it'll create a new instance of UnitOfWork and will use it instead of IUnitOfWork.
             // If in one request there is more than one IUnitOfWork, it will use same instance for those also.
             // If we want to create new instance for every new IUnitOfWork, we need to use AddTransient instead of AddScoped.
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // we use typeof and <> here because we need to explain these classes are generic.
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddControllers();
         }
