@@ -38,6 +38,14 @@ namespace SampleNLayerProject.API.Controllers
             return Ok(_mapper.Map<CategoryDto>(category));
         }
 
+        [HttpGet("{id}/products")]
+        public async Task<IActionResult> GetWithProductsById(int id)
+        {
+            var categoryWithProducts = await _categoryService.GetWithProductsByIdAsync(id);
+            return Ok(_mapper.Map<CategoryWithProductsDto>(categoryWithProducts));
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Save(CategoryDto categoryDto)
         {
