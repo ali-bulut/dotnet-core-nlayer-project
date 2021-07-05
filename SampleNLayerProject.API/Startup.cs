@@ -56,6 +56,9 @@ namespace SampleNLayerProject.API
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
 
+            // for configuring AutoMapper
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
         }
 
