@@ -17,6 +17,7 @@ namespace SampleNLayerProject.Data
         // defining db tables
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Person> Persons { get; set; }  
 
 
         // method that works before table creation operation on db.
@@ -24,6 +25,10 @@ namespace SampleNLayerProject.Data
         {
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new PersonConfiguration());
+
+            // we may also add configurations directly here.
+            //modelBuilder.Entity<Person>().HasKey(x => x.Id);
 
             modelBuilder.ApplyConfiguration(new ProductSeed(new int[] { 1, 2 }));
             modelBuilder.ApplyConfiguration(new CategorySeed(new int[] { 1, 2 }));
