@@ -28,5 +28,12 @@ namespace SampleNLayerProject.API.Controllers
             var categories = await _categoryService.GetAllAsync();
             return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            return Ok(_mapper.Map<CategoryDto>(category));
+        }
     }
 }
