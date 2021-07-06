@@ -60,6 +60,12 @@ namespace SampleNLayerProject.API
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                // that means, we disabled default json data for model state invalid errors.
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

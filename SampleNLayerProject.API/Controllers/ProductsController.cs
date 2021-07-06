@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleNLayerProject.API.DTOs;
+using SampleNLayerProject.API.Filters;
 using SampleNLayerProject.Core.Models;
 using SampleNLayerProject.Core.Services;
 
@@ -45,6 +46,7 @@ namespace SampleNLayerProject.API.Controllers
             return Ok(_mapper.Map<ProductWithCategoryDto>(productWithCategory));
         }
 
+        [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
