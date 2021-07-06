@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SampleNLayerProject.API.Filters;
 using SampleNLayerProject.Core.Repositories;
 using SampleNLayerProject.Core.Services;
 using SampleNLayerProject.Core.UnitOfWorks;
@@ -50,6 +51,9 @@ namespace SampleNLayerProject.API
             // If we want to create new instance for every new IUnitOfWork, we need to use AddTransient instead of AddScoped.
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            // we registered NotFoundFilter as ServiceFilter. We have to register it if the filter class has to take a parameter.
+            services.AddScoped(typeof(NotFoundFilter<>));
+
             // we use typeof and <> here because we need to explain these classes are generic.
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<>), typeof(Service<>));
@@ -59,7 +63,10 @@ namespace SampleNLayerProject.API
             // for configuring AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers(o => {
+                // we are able to add filters to all controllers and their endpoints.
+                o.Filters.Add(new ValidationFilter());
+            });
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
