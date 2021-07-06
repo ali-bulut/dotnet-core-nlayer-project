@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleNLayerProject.API.DTOs;
+using SampleNLayerProject.API.Filters;
 using SampleNLayerProject.Core.Models;
 using SampleNLayerProject.Core.Services;
 
@@ -31,6 +32,7 @@ namespace SampleNLayerProject.API.Controllers
             return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -38,6 +40,7 @@ namespace SampleNLayerProject.API.Controllers
             return Ok(_mapper.Map<ProductDto>(product));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}/category")]
         public async Task<IActionResult> GetWithCategoryById(int id)
         {
@@ -45,6 +48,7 @@ namespace SampleNLayerProject.API.Controllers
             return Ok(_mapper.Map<ProductWithCategoryDto>(productWithCategory));
         }
 
+        [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
@@ -59,6 +63,7 @@ namespace SampleNLayerProject.API.Controllers
             return NoContent();
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {
