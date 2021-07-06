@@ -23,6 +23,7 @@
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <None Remove="Mapping\" />
     <None Remove="Filters\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
@@ -36,5 +37,6 @@
     <Folder Include="DTOs\" />
     <Folder Include="Mapping\" />
     <Folder Include="Filters\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
