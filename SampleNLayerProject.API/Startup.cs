@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SampleNLayerProject.API.DTOs;
 using SampleNLayerProject.API.Filters;
 using SampleNLayerProject.Core.Repositories;
 using SampleNLayerProject.Core.Services;
@@ -19,6 +23,7 @@ using SampleNLayerProject.Data;
 using SampleNLayerProject.Data.Repositories;
 using SampleNLayerProject.Data.UnitOfWorks;
 using SampleNLayerProject.Service.Services;
+using SampleNLayerProject.API.Extensions;
 
 namespace SampleNLayerProject.API
 {
@@ -82,6 +87,28 @@ namespace SampleNLayerProject.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCustomException();
+
+            // instead of writing whole logic here, we created a new extension method and used it here above.
+            //app.UseExceptionHandler(config =>
+            //{
+            //    config.Run(async context =>
+            //    {
+            //        context.Response.StatusCode = 500;
+            //        context.Response.ContentType = "application/json";
+            //        var error = context.Features.Get<IExceptionHandlerFeature>();
+            //        if(error != null)
+            //        {
+            //            var exception = error.Error;
+            //            ErrorDto errorDto = new ErrorDto();
+            //            errorDto.Status = 500;
+            //            errorDto.Errors.Add(exception.Message);
+
+            //            await context.Response.WriteAsync(JsonConvert.SerializeObject(errorDto));
+            //        }
+            //    });
+            //});
 
             app.UseHttpsRedirection();
 
